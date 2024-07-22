@@ -2,11 +2,8 @@
 
 import { useState } from "react";
 
-import ProductGrid from "./ProductGrid"
-
-export default function Navbar(){
+export default function Navbar({ setResultsF }){
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
 
   const queryResults = async ev => {
     ev.preventDefault();
@@ -14,7 +11,7 @@ export default function Navbar(){
     const response = await fetch("/api/search?q=" + query);
     const productData = await response.json();
 
-    setResults(productData);
+    setResultsF(productData);
   }
 
   return (
@@ -24,7 +21,6 @@ export default function Navbar(){
           <input type="text" placeholder="search" onChange={ev => setQuery(ev.target.value)}/>
         </form>
       </nav>
-      <ProductGrid products={results}/>
     </div>
   )
 }
