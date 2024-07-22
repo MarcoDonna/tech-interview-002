@@ -8,10 +8,22 @@ export default function Navbar({ setResultsF }){
   const queryResults = async ev => {
     ev.preventDefault();
 
-    const response = await fetch("/api/search?q=" + query);
+    const response = await fetch("/api/search?" + queryParser(query));
     const productData = await response.json();
 
     setResultsF(productData);
+  }
+
+  const queryParser = query => {
+    const filterItems = query.split("and");
+
+    const filters = filterItems.map(item => {
+      const [key, value] = item.split(/[<>]/g)
+
+      return key.trim().toLowerCase() + (item.includes("<") ? "Max" : "Min") + "=" + value.trim();
+    });
+
+    return filters.join("&")
   }
 
   return (
