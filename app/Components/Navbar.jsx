@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import Product from "./Product"
+
 export default function Navbar(){
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -23,7 +25,15 @@ export default function Navbar(){
         </form>
       </nav>
       <div>
-        {JSON.stringify(results)}
+        {
+          results.map(product => <Product
+            key={product.id}
+            title={product.title}
+            price={product.price}
+            rating={product.rating}
+            image={product.thumbnail}
+          />)
+        }
       </div>
     </div>
   )
