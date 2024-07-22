@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import Product from "./Product"
+import ProductGrid from "./ProductGrid"
 
 export default function Navbar(){
   const [query, setQuery] = useState("");
@@ -24,17 +24,7 @@ export default function Navbar(){
           <input type="text" placeholder="search" onChange={ev => setQuery(ev.target.value)}/>
         </form>
       </nav>
-      <div>
-        {
-          results.map(product => <Product
-            key={product.id}
-            title={product.title}
-            price={product.price}
-            rating={product.rating}
-            image={product.thumbnail}
-          />)
-        }
-      </div>
+      <ProductGrid products={results}/>
     </div>
   )
 }
