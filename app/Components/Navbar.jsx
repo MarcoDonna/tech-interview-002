@@ -15,6 +15,9 @@ export default function Navbar({ setResultsF }){
   }
 
   const queryParser = query => {
+    if(!query)
+      return "";
+
     const filterItems = query.split("and");
 
     const filters = filterItems.map(item => {
