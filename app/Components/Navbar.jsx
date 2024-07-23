@@ -11,9 +11,9 @@ export default function Navbar({ setResultsF }){
     const response = await fetch("/api/search?" + queryParser(query));
     const productData = await response.json();
 
-    const queryHistory = JSON.parse(localStorage.getItem("queryHistory") || "[]");
-    queryHistory.push(query);
-    localStorage.setItem("queryHistory", JSON.stringify(queryHistory));
+    const queries = JSON.parse(localStorage.getItem('queryHistory')) || [];
+    queries.push(query);
+    localStorage.setItem('queryHistory', JSON.stringify(queries));
 
     setResultsF(productData);
   }

@@ -1,19 +1,31 @@
-"use client"
+'use client';
 
-export default function History(){
+import { useEffect, useState } from 'react';
+
+export default function History() {
+  const [queryHistory, setQueryHistory] = useState([]);
+
+  useEffect(() => {
+    const queries = JSON.parse(localStorage.getItem('queryHistory')) || [];
+    setQueryHistory(queries);
+  }, []);
+
   const clearHistory = () => {
-    localStorage.setItem("queryHistory", "[]")
-    location.reload();
-  }
-
-  const queryHistory = JSON.parse(localStorage.getItem("queryHistory"))
+    localStorage.removeItem('queryHistory');
+    setQueryHistory([]);
+  };
 
   return (
     <div>
-      <button onClick={clearHistory}>Delete history</button>
-      {
-        queryHistory.map(item => <p>{item}</p>)
-      }
+      <div>
+        <h1>Search History</h1>
+        <button onClick={clearHistory}>Clear History</button>
+      </div>
+      <ul>
+        {queryHistory.map((query, index) => (
+          <li key={index}>{query}</li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
