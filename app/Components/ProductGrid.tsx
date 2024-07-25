@@ -1,6 +1,19 @@
 import Product from "./Product"
 
-export default function ProductGrid({ products }){
+type Product = {
+  id: number,
+  title: string,
+  rating: number,
+  price: number,
+  thumbnail: string,
+  category: string
+}
+
+type Props = {
+  products: Array<Product>
+}
+
+export default function ProductGrid({ products } : Props){
   return (
     <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10">
       {
@@ -9,7 +22,7 @@ export default function ProductGrid({ products }){
           title={product.title}
           price={product.price}
           rating={product.rating}
-          image={product.thumbnail}
+          thumbnail={product.thumbnail}
           category={product.category}
         />)
       }
